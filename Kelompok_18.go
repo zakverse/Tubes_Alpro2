@@ -221,16 +221,22 @@ func Kasih_Rating_ide_Proyek() {
 
 }
 
-func Binary_Search(cariJudul string) int {
+func Binary_Search() int {
 
 	Selection_Sort() // fungsi Sorting berdasarkan Judul
+	input := bufio.NewReader(os.Stdin)
+
+	
+	fmt.Print("Masukkan Judul Yang dicari : ")
+	Carijudul, _ := input.ReadString('\n')
+	Carijudul = strings.TrimSpace(Carijudul)
 
 	rendah := 0
 	tinggi := len(Daftar_Ide) - 1
 
 	for rendah <= tinggi {
 		tengah := (rendah + tinggi) / 2
-		cari := strings.ToLower(cariJudul)
+		cari := strings.ToLower(Carijudul)
 		target := strings.ToLower(Daftar_Ide[tengah].Judul)
 
 		if cari == target {
@@ -245,10 +251,17 @@ func Binary_Search(cariJudul string) int {
 	return -1 
 }
 
-func Squential_Search(cariJudul string) int{
+func Squential_Search() int{
+
+	input := bufio.NewReader(os.Stdin)
+
+	
+	fmt.Print("Masukkan Judul Yang dicari : ")
+	Carijudul, _ := input.ReadString('\n')
+	Carijudul = strings.TrimSpace(Carijudul)
 	
 	for i := 0; i < len(Daftar_Ide); i++ {
-        if strings.Contains(strings.ToLower(Daftar_Ide[i].Judul), strings.ToLower(cariJudul)) {
+        if strings.Contains(strings.ToLower(Daftar_Ide[i].Judul), strings.ToLower(Carijudul)) {
             return i
         }
     }
@@ -261,12 +274,7 @@ func Cari_Ide() {
 		fmt.Print("Belum Ada Daftar Ide")
 		return
 	}
-	input := bufio.NewReader(os.Stdin)
-
 	
-	fmt.Print("Masukkan Judul Yang dicari : ")
-	Carijudul, _ := input.ReadString('\n')
-	Carijudul = strings.TrimSpace(Carijudul)
 
 	var pilih int 
 	fmt.Println("Pilih Menu Search")
@@ -278,24 +286,24 @@ func Cari_Ide() {
 	var index int
 	
 	if pilih == 1 {
-		index = Binary_Search(Carijudul) 
-		ide := Daftar_Ide[index]
-
-			if index == -1 {
-				fmt.Println("Tidak ada")
+		index = Binary_Search() 
+		
+		if index == -1 {
+			fmt.Println("Tidak ada")
 			}else {
+				ide := Daftar_Ide[index]
 				fmt.Println("\nIde ditemukan")
 				fmt.Println("Judul\t:", ide.Judul)
 				fmt.Println("Deskripsi\t:", ide.Deskripsi)
 				fmt.Println("Rating\t:", ide.Rating)
 			}
 	}else if pilih == 2 {
-		index = Squential_Search(Carijudul)
-		ide := Daftar_Ide[index]
-
-			if index == -1 {
-				fmt.Println("Tidak ada")
+		index = Squential_Search()
+		
+		if index == -1 {
+			fmt.Println("Tidak ada")
 			}else {
+				ide := Daftar_Ide[index]
 				fmt.Println("\nIde ditemukan:")
 				fmt.Println("Judul\t:", ide.Judul)
 				fmt.Println("Deskripsi\t:", ide.Deskripsi)
@@ -345,7 +353,7 @@ func Urutan_ide() {
 	}
 
 	var pilih int 
-	fmt.Printf("\nMenu Sorting\n\n ")
+	fmt.Printf("\nMenu Sorting\n\n")
 	fmt.Println("1.Insertion Sort (Rating terbesar ke terkecil) ")
 	fmt.Println("2.Selection Sort (Urutan Judul (Urutan Alfabet) ")
 	fmt.Print("Masukkan Pilihan : ")
