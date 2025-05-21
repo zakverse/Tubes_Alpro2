@@ -20,6 +20,8 @@ var Daftar_Ide []Isi_Ide
 
 func main() {
 
+	Data_Dummy()
+
 	var pilih int
 
 	for {
@@ -35,6 +37,7 @@ func main() {
 
 		fmt.Print("Pilih Menu (1-8) : ")
 		fmt.Scanln(&pilih)
+		fmt.Println()
 
 		if pilih == 1 {
 			Lihat_Daftar_Ide()
@@ -59,6 +62,48 @@ func main() {
 	}
 }
 
+func Data_Dummy(){
+
+Daftar_Ide = append(Daftar_Ide, Isi_Ide{
+		Judul:     "Aplikasi Pencari Kosan",
+		Deskripsi: "Aplikasi yang membantu mahasiswa mencari kosan berdasarkan lokasi, harga, dan fasilitas.",
+		Kategori:  "Teknologi",
+		Rating:    7,
+		Tanggal:   time.Now().AddDate(-2,-4,-5),
+	})
+Daftar_Ide = append(Daftar_Ide, Isi_Ide{
+		Judul:     "Bot Reminder Tugas Kuliah",
+		Deskripsi: "Bot yang mengirimkan pengingat tugas lewat WhatsApp atau Telegram.",
+		Kategori:  "Pendidikan",
+		Rating:    8,
+		Tanggal:   time.Now().AddDate(0, 0, -5),
+	})
+
+	Daftar_Ide = append(Daftar_Ide, Isi_Ide{
+		Judul:     "Platform Jual-Beli Barang Bekas",
+		Deskripsi: "Tempat jual beli barang bekas seperti buku dan alat elektronik untuk mahasiswa.",
+		Kategori:  "E-commerce",
+		Rating:    6,
+		Tanggal:   time.Now().AddDate(0, 0, -20),
+	})
+
+	Daftar_Ide = append(Daftar_Ide, Isi_Ide{
+		Judul:     "Aplikasi Manajemen Keuangan",
+		Deskripsi: "Aplikasi mencatat pengeluaran dan pemasukan dengan grafik analisis.",
+		Kategori:  "Finansial",
+		Rating:    9,
+		Tanggal:   time.Now().AddDate(0, 0, -15),
+	})
+
+	Daftar_Ide = append(Daftar_Ide, Isi_Ide{
+		Judul:     "Website Portofolio Mahasiswa IT",
+		Deskripsi: "Platform untuk mahasiswa membuat portofolio online secara otomatis.",
+		Kategori:  "Karier",
+		Rating:    5,
+		Tanggal:   time.Now().AddDate(0, 0, -7),
+	})
+}
+
 func Lihat_Daftar_Ide() {
 
 	if len(Daftar_Ide) == 0 {
@@ -67,6 +112,7 @@ func Lihat_Daftar_Ide() {
 	}
 
 	fmt.Println("Daftar Ide")
+	
 
 	for i := 0; i < len(Daftar_Ide); i++ {
 
@@ -90,15 +136,15 @@ func Tambah_Ide_Proyek() {
 
 	var Ide Isi_Ide
 
-	fmt.Print("Masukkan Judul Ide : ")
+	fmt.Print("Masukkan Judul Ide\t: ")
 	Judul, _ := Input.ReadString('\n')
 	Ide.Judul = strings.TrimSpace(Judul)
 
-	fmt.Print("Masukkan Deskripsi Ide : ")
+	fmt.Print("Masukkan Deskripsi Ide\t: ")
 	Deskripsi, _ := Input.ReadString('\n')
 	Ide.Deskripsi = strings.TrimSpace(Deskripsi)
 
-	fmt.Print("Masukkan Kategori : ")
+	fmt.Print("Masukkan Kategori\t: ")
 	Kategori, _ := Input.ReadString('\n')
 	Ide.Kategori = strings.TrimSpace(Kategori)
 
