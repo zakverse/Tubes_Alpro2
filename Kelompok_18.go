@@ -1,5 +1,4 @@
 package main
-
 import (
 	"bufio"
 	"fmt"
@@ -64,14 +63,14 @@ func main() {
 
 func Data_Dummy(){
 
-Daftar_Ide = append(Daftar_Ide, Isi_Ide{
+	Daftar_Ide = append(Daftar_Ide, Isi_Ide{
 		Judul:     "Aplikasi Pencari Kosan",
 		Deskripsi: "Aplikasi yang membantu mahasiswa mencari kosan berdasarkan lokasi, harga, dan fasilitas.",
 		Kategori:  "Teknologi",
 		Rating:    7,
 		Tanggal:   time.Now().AddDate(-2,-4,-5),
 	})
-Daftar_Ide = append(Daftar_Ide, Isi_Ide{
+	Daftar_Ide = append(Daftar_Ide, Isi_Ide{
 		Judul:     "Bot Reminder Tugas Kuliah",
 		Deskripsi: "Bot yang mengirimkan pengingat tugas lewat WhatsApp atau Telegram.",
 		Kategori:  "Pendidikan",
@@ -229,11 +228,20 @@ func Hapus_Ide_Proyek() {
 		return
 	}
 
+	var konfirmasi string
+    fmt.Print("Yakin ingin menghapus? (y/n)\t: ")
+    fmt.Scanln(&konfirmasi)
+
+	if konfirmasi == "y"{
 	Ide_Yang_Dihapus := Daftar_Ide[Nomor_Ide-1].Judul
 	Daftar_Ide = append(Daftar_Ide[:Nomor_Ide-1], Daftar_Ide[Nomor_Ide:]...)
 	fmt.Println("Judul ", Ide_Yang_Dihapus, " Telah Dihapus")
-	fmt.Println()
+	
+	}else {
+		fmt.Println("Penghapusan dibatalkan")
+	}
 
+	fmt.Println()
 }
 
 func Kasih_Rating_ide_Proyek() {
@@ -297,7 +305,7 @@ func Binary_Search() int {
 	return -1 
 }
 
-func Squential_Search() int{
+func Squential_Search() []int{
 
 	input := bufio.NewReader(os.Stdin)
 
@@ -306,12 +314,14 @@ func Squential_Search() int{
 	Carijudul, _ := input.ReadString('\n')
 	Carijudul = strings.TrimSpace(Carijudul)
 	
+	var hasil []int
 	for i := 0; i < len(Daftar_Ide); i++ {
         if strings.Contains(strings.ToLower(Daftar_Ide[i].Judul), strings.ToLower(Carijudul)) {
-            return i
+            hasil = append(hasil , i)
+			
         }
     }
-    return -1
+    return hasil
 }
 
 func Cari_Ide() {
@@ -344,16 +354,20 @@ func Cari_Ide() {
 				fmt.Println("Rating\t:", ide.Rating)
 			}
 	}else if pilih == 2 {
-		index = Squential_Search()
+		var hasil []int
+		hasil = Squential_Search()
 		
-		if index == -1 {
+		if len(hasil) == 0 {
 			fmt.Println("Tidak ada")
 			}else {
-				ide := Daftar_Ide[index]
+				for i := 0 ; i < len(hasil); i++{
+				ide := Daftar_Ide[hasil[i]]
 				fmt.Println("\nIde ditemukan:")
 				fmt.Println("Judul\t:", ide.Judul)
 				fmt.Println("Deskripsi\t:", ide.Deskripsi)
 				fmt.Println("Rating\t:", ide.Rating)
+				fmt.Println()
+			}
 			}
 	}else {
 		fmt.Println("Pilihan tidak Ada")
