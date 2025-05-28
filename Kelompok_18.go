@@ -56,7 +56,8 @@ func main() {
 			fmt.Println("Terima Kasih")
 			return
 		} else {
-			fmt.Print("Menu Enggak Ada")
+			fmt.Println("Menu Enggak Ada")
+			fmt.Println()
 		}
 	}
 }
